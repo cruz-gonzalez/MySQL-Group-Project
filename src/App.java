@@ -17,7 +17,7 @@ public class App {
 		try {
 		Connection conn = DriverManager.getConnection(connectionString, "root", "EyesUpGuardian");
 		System.out.println("Connected successfully!");
-				System.out.println("Enter ID of desired nba player: ");
+				System.out.println("Enter ID of desired nba player rank: ");
 				String id = scanner.nextLine();
 				
 				PreparedStatement ps = conn.prepareStatement(SELECT_QUERY);
@@ -25,9 +25,11 @@ public class App {
 				ResultSet rs = ps.executeQuery();
 				
 				while (rs.next()) {
-					System.out.println("ID: " + rs.getInt(1) + " Team ID: " + rs.getInt(2) + " Player Name: " + rs.getString(3) + 
-					" Player Rank: " + rs.getInt(4) + " Team: " + rs.getString(5) + " Average Points: " + rs.getInt(6) 
-					+ " Games Played: " + rs.getInt(7) + " Minutes Per Game: " + rs.getInt(8) + "\n");
+					System.out.println("ID: " + rs.getInt(1) + " | Team ID: " + rs.getInt(2) + " | Player Name: " + rs.getString(3) + 
+					" | Player Rank: " + rs.getInt(4) + " | Team: " + rs.getString(5) + " | Average Points: " + rs.getInt(6) 
+					+ " | Games Played: " + rs.getInt(7) + " | Minutes Per Game: " + rs.getInt(8) + "\n");
+					
+				System.out.println("You have been disconnected.");
 				}
 		} catch (SQLException e) {
 			System.out.println("Error connecting to the database.");
