@@ -25,7 +25,7 @@ public class Menu {
 			selection = scanner.nextLine();
 			
 			if(selection.equals("1")) {
-				//displayTeams();
+				displayTeams();
 			}
 			if(selection.equals("2")) {
 				//displayTeam();
