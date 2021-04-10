@@ -6,11 +6,11 @@ public class Players {
 	private String playerName;
 	private int playerRank;
 	private String team;
-	private int averagePoints;
+	private double averagePoints;
 	private int gamesPlayed;
-	private int minutesPerGame;
+	private double minutesPerGame;
 	
-	public Players(int id, int teamId, String playerName, int playerRank, String team, int averagePoints, int gamesPlayed, int minutesPerGame) {
+	public Players(int id, int teamId, String playerName, int playerRank, String team, double averagePoints, int gamesPlayed, double minutesPerGame) {
 		this.setId(id);
 		this.setTeamId(teamId);
 		this.setPlayerName(playerName);
@@ -61,11 +61,11 @@ public class Players {
 		this.team = team;
 	}
 
-	public int getAveragePoints() {
+	public double getAveragePoints() {
 		return averagePoints;
 	}
 
-	public void setAveragePoints(int averagePoints) {
+	public void setAveragePoints(double averagePoints) {
 		this.averagePoints = averagePoints;
 	}
 
@@ -77,11 +77,11 @@ public class Players {
 		this.gamesPlayed = gamesPlayed;
 	}
 
-	public int getMinutesPerGame() {
+	public double getMinutesPerGame() {
 		return minutesPerGame;
 	}
 
-	public void setMinutesPerGame(int minutesPerGame) {
+	public void setMinutesPerGame(double minutesPerGame) {
 		this.minutesPerGame = minutesPerGame;
 	}
 }

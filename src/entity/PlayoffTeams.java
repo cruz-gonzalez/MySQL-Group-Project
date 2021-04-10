@@ -6,9 +6,9 @@ public class PlayoffTeams {
 	private String teamName;
 	private int wins;
 	private int losses;
-	private char conference;
+	private String conference;
 	
-	public PlayoffTeams (int id, int teamRank, String teamName, int wins, int losses, char conference) {
+	public PlayoffTeams (int id, int teamRank, String teamName, int wins, int losses, String conference) {
 		this.setId(id);
 		this.setTeamRank(teamRank);
 		this.setTeamName(teamName);
@@ -57,11 +57,11 @@ public class PlayoffTeams {
 		this.losses = losses;
 	}
 
-	public char getConference() {
+	public String getConference() {
 		return conference;
 	}
 
-	public void setConference(char conference) {
+	public void setConference(String conference) {
 		this.conference = conference;
 	}
 }
