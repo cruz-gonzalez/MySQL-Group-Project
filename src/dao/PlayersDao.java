@@ -16,7 +16,7 @@ public class PlayersDao {
 	private final String GET_PLAYERS_QUERY = "SELECT * FROM players";
 	private final String GET_PLAYER_BY_ID_QUERY = "SELECT * FROM players WHERE id = ?";
 	private final String DELETE_PLAYERS_BY_TEAM_ID_QUERY = "DELETE FROM players WHERE id = ?";
-	private final String CREATE_NEW_PLAYER_QUERY = "INSERT INTO nba.players(id, team_id, player_name, player_rank, team, avg_points, games_played, minutes_per_game) VALUES(?,?,?,?,?,?,?,?)";
+	private final String CREATE_NEW_PLAYER_QUERY = "INSERT INTO players(id, team_id, player_name, player_rank, team, avg_points, games_played, minutes_per_game) VALUES(?,?,?,?,?,?,?,?)";
 
 	public PlayersDao() {
 		connection = DBConnection.getConnection();
@@ -50,7 +50,7 @@ public class PlayersDao {
 	public void createNewPlayer(int id, int teamId, String playerName, int playerRank, String team, double averagePoints, int gamesPlayed, double minutesPerGame) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_PLAYER_QUERY);
 		ps.setInt(1, id);
-		ps.setInt(2, teamId);
+		ps.setInt(2,teamId);
 		ps.setString(3, playerName);
 		ps.setInt(4, playerRank);
 		ps.setString(5, team);
@@ -61,9 +61,9 @@ public class PlayersDao {
 	}
 	
 	//delete players by team id
-	public void deletePlayersByPlayoffTeamsId(int playoffTeamId) throws SQLException {
+	public void deletePlayersByPlayoffTeamsId(int id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(DELETE_PLAYERS_BY_TEAM_ID_QUERY);
-		ps.setInt(1, playoffTeamId);
+		ps.setInt(1, id);
 		ps.executeUpdate();
 	}
 	

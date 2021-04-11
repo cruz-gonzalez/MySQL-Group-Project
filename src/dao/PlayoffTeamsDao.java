@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import entity.PlayoffTeams;
 public class PlayoffTeamsDao {
 	
 	private Connection connection;
-	private PlayersDao playersDao = new PlayersDao(); 
+	private PlayersDao playerDao = new PlayersDao(); 
 	private final String GET_TEAMS_QUERY = "SELECT * FROM playoff_teams";
 	private final String GET_TEAM_BY_ID_QUERY = "SELECT * FROM playoff_teams WHERE id = ?";
 	private final String CREATE_NEW_TEAM_QUERY = "INSERT INTO playoff_teams(id, team_rank, team_name, wins, losses, conference) VALUES(?,?,?,?,?,?)";
@@ -23,7 +22,7 @@ public class PlayoffTeamsDao {
 	public PlayoffTeamsDao () {
 		connection = DBConnection.getConnection();
 	}
-	//get all playoffteams with proper syntax according to our playoffteam table parameters
+	
 	public List<PlayoffTeams> getTeams() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_TEAMS_QUERY).executeQuery();
 		List<PlayoffTeams> playoffTeams = new ArrayList<PlayoffTeams>();
@@ -45,17 +44,17 @@ public class PlayoffTeamsDao {
 		
 	}
 	
-	//create a playoffteam with proper syntax according to our playoffteam table parameters
-		public void createTeam(int id, int teamRank, String teamName, int wins, int losses, String conference) throws SQLException {
-			PreparedStatement ps = connection.prepareStatement(CREATE_NEW_TEAM_QUERY);
-			ps.setInt(1, id);
-			ps.setInt(2, teamRank);
-			ps.setString(3,teamName);
-			ps.setInt(4, wins);
-			ps.setInt(5,losses);
-			ps.setString(6, conference);
-			ps.executeUpdate();
-		}
+	//create a team with proper syntax according to table parameters
+	public void createNewTeam(int id, int teamRank, String teamName, int wins, int losses, String conference) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_TEAM_QUERY);
+		ps.setInt(1, id);
+		ps.setInt(2, teamRank);
+		ps.setString(3, teamName);
+		ps.setInt(4, wins);
+		ps.setInt(5, losses);
+		ps.setString(6, conference);
+		ps.executeUpdate();
+	}
 	
 	//get a team with proper syntax according to our playoffteam table parameters
 	private PlayoffTeams populateTeam(int id, int teamRank, String teamName, int wins, int losses, String conference) {
@@ -64,7 +63,7 @@ public class PlayoffTeamsDao {
 	
 	//delete a team according to the playoffteam table parameters
 	public void deleteTeamById(int id) throws SQLException {
-		playersDao.deletePlayersByPlayoffTeamsId(id);
+		playerDao.deletePlayersByPlayoffTeamsId(id);
 		PreparedStatement ps = connection.prepareStatement(DELETE_TEAM_BY_ID_QUERY);
 		ps.setInt(1,  id);
 		ps.executeUpdate();

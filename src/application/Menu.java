@@ -10,7 +10,6 @@ import entity.PlayoffTeams;
 import entity.Sponsors;
 
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 public class Menu {
@@ -63,7 +62,7 @@ public class Menu {
 					createPlayer();
 				}
 				if(selection.equals("8")) {
-					//deletePlayer();
+					deletePlayer();
 				}
 				if(selection.equals("9")) {
 					displaySponsors();
@@ -123,7 +122,7 @@ public class Menu {
 			int losses = Integer.parseInt(scanner.nextLine());
 			System.out.println("Team Conference ('E' or 'W' for East or West): ");
 			String conference  = scanner.nextLine(); 
-			playoffTeamsDao.createTeam(id, teamRank, teamName, wins, losses, conference);
+			playoffTeamsDao.createNewTeam(id, teamRank, teamName, wins, losses, conference);
 			System.out.println("Team successfully created!");
 		}
 		//delete a team using function defined in playoffteams file, based off the menu.start(4)
@@ -170,17 +169,26 @@ public class Menu {
 		System.out.println("Enter Player's Team (Limit - 3 characters long; must be name of an existing team (relationship with a team)): ");
 		String team = scanner.nextLine();
 		
-		System.out.println("Enter Average Points: ");
+		System.out.println("Enter Average Points ('_ _. _' notation): ");
 		double averagePoints = Double.parseDouble(scanner.nextLine());
 		
 		System.out.println("Enter Games Played (MAX: 82): ");
 		int gamesPlayed = Integer.parseInt(scanner.nextLine());
 		
-		System.out.println("Enter Minutes Per Game: ");
+		System.out.println("Enter Minutes Per Game ('_ _. _' notation): ");
 		double minutesPerGame = Double.parseDouble(scanner.nextLine());
 		
 		playersDao.createNewPlayer(id, teamId, playerName, playerRank, team, averagePoints, gamesPlayed, minutesPerGame);
+		
+		System.out.println("New Player succesfully created!");
 		}
+	
+	private void deletePlayer() throws SQLException {
+		System.out.println("Enter Player Id to delete: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		playersDao.deletePlayersByPlayoffTeamsId(id);
+		System.out.println("Player successfully deleted!");
+	}
 	
 	//display all sponsors using function defined in sponsors file, based off the menu.start option
 	private void displaySponsors() throws SQLException {

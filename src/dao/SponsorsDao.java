@@ -13,7 +13,7 @@ import entity.Sponsors;
 public class SponsorsDao {
 	
 	private Connection connection;
-	private final String GET_SPONSORS_QUERY = "SELECT * FROM sponsors.";
+	private final String GET_SPONSORS_QUERY = "SELECT * FROM sponsors";
 	private final String GET_SPONSOR_BY_ID_QUERY = "SELECT * FROM sponsors WHERE id = ?";
 	
 	public SponsorsDao () {
