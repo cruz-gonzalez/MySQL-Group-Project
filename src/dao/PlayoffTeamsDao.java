@@ -16,7 +16,11 @@ public class PlayoffTeamsDao {
 	private final String GET_TEAMS_QUERY = "SELECT * FROM playoff_teams";
 	private final String GET_TEAM_BY_ID_QUERY = "SELECT * FROM playoff_teams WHERE id = ?";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	private final String CREATE_NEW_TEAM_QUERY = "INSERT INTO playoff_teams(name) VALUES(?)";
+=======
+	private final String CREATE_NEW_TEAM_QUERY = "INSERT INTO playoff_teams(id, team_rank, team_name, wins, losses, conference) VALUES(?,?,?,?,?,?)";
+>>>>>>> Stashed changes
 =======
 	private final String CREATE_NEW_TEAM_QUERY = "INSERT INTO playoff_teams(id, team_rank, team_name, wins, losses, conference) VALUES(?,?,?,?,?,?)";
 >>>>>>> Stashed changes
@@ -38,8 +42,12 @@ public class PlayoffTeamsDao {
 		return playoffTeams;
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	
 	//get all playoffteams with proper syntax according to our playoffteam table parameters
+=======
+	//get a playoffteam with proper syntax according to our playoffteam table parameters
+>>>>>>> Stashed changes
 =======
 	//get a playoffteam with proper syntax according to our playoffteam table parameters
 >>>>>>> Stashed changes
@@ -64,6 +72,7 @@ public class PlayoffTeamsDao {
 		return new PlayoffTeams(id, teamRank, teamName, wins, losses, conference);
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	
 	//delete a team according to the playoffteam table parameters
 	public void deleteTeamById(int id) throws SQLException {
@@ -74,6 +83,8 @@ public class PlayoffTeamsDao {
 	}
 	
 =======
+=======
+>>>>>>> Stashed changes
 	//delete a playoffteam with proper syntax according to our playoffteam table parameters
 	public void deleteTeamById(int id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(DELETE_TEAM_BY_ID_QUERY);
@@ -91,5 +102,8 @@ public class PlayoffTeamsDao {
 		ps.setString(6, conference);
 		ps.executeUpdate();
 	}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

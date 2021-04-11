@@ -16,8 +16,13 @@ public class Menu {
 	
 	private PlayoffTeamsDao playoffTeamsDao = new PlayoffTeamsDao();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	private PlayersDao playersDao = new PlayersDao();
 	private SponsorsDao sponsorsDao = new SponsorsDao();
+=======
+	//private PlayersDao playerDao = new PlayersDao();
+	//private ScannerDao scannerDao = new ScannerDao();
+>>>>>>> Stashed changes
 =======
 	//private PlayersDao playerDao = new PlayersDao();
 	//private ScannerDao scannerDao = new ScannerDao();
@@ -51,6 +56,7 @@ public class Menu {
 				else if(selection.equals("2")) {
 					displayTeam();
 				}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 				if(selection.equals("3")) {
 					createTeam();
@@ -97,6 +103,29 @@ public class Menu {
 				else if(selection.equals("9")) {
 					//displaySponsors();
 				}
+=======
+				else if(selection.equals("3")) {
+					createTeam();
+				}
+				else if(selection.equals("4")) {
+					deleteTeam();
+				}
+				else if(selection.equals("5")) {
+					//displayPlayers();
+				}
+				else if(selection.equals("6")) {
+					//displayPlayer();
+				}
+				else if(selection.equals("7")) {
+					//createPlayer();
+				}
+				else if(selection.equals("8")) {
+					//deletePlayer();
+				}
+				else if(selection.equals("9")) {
+					//displaySponsors();
+				}
+>>>>>>> Stashed changes
 				else if(selection.equals("10")) {
 					//displaySponsor();
 >>>>>>> Stashed changes
@@ -118,8 +147,12 @@ public class Menu {
 		}
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	
 	//display all teams using function defined in playoffteams file, based off the menu.start option
+=======
+	//display all teams using function defined in playoffteams file, based off the menu.start option(1)
+>>>>>>> Stashed changes
 =======
 	//display all teams using function defined in playoffteams file, based off the menu.start option(1)
 >>>>>>> Stashed changes
@@ -132,8 +165,12 @@ public class Menu {
 		
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	
 	//display a team using function defined in playoffteams file, based off the menu.start option
+=======
+	//display a teams using function defined in playoffteams file, based off the menu.start option(2)
+>>>>>>> Stashed changes
 =======
 	//display a teams using function defined in playoffteams file, based off the menu.start option(2)
 >>>>>>> Stashed changes
@@ -143,6 +180,7 @@ public class Menu {
 		PlayoffTeams team = playoffTeamsDao.getTeamById(id);
 		System.out.println(team.getId() + ": " + team.getTeamName() + ": " + team.getTeamRank() + ": " + team.getWins() + ": " + team.getLosses() + ": " 
 		+ team.getConference());
+<<<<<<< Updated upstream
 	}
 	
 <<<<<<< Updated upstream
@@ -206,6 +244,10 @@ public class Menu {
 		Sponsors sponsor = SponsorsDao.getSponsorById(id);
 		System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
 =======
+=======
+	}
+	
+>>>>>>> Stashed changes
 	//create a team using function designed in playoffteams file, based off the menu.star
 	private void createTeam() throws SQLException {
 		System.out.println("Enter an Id: ");
@@ -229,6 +271,9 @@ public class Menu {
 		int id = Integer.parseInt(scanner.nextLine());
 		playoffTeamsDao.deleteTeamById(id);
 		System.out.println("Team successfully deleted!");
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	}
 	

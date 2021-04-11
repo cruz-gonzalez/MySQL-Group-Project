@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +45,8 @@ public class SponsorsDao {
 	private Sponsors populateSponsor(int id, String sponsorName) {
 		return new Sponsors(id, sponsorName);
 	}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
