@@ -3,7 +3,9 @@ package application;
 import java.util.Scanner;
 
 import dao.PlayoffTeamsDao;
+import dao.SponsorsDao;
 import entity.PlayoffTeams;
+import entity.Sponsors;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -97,6 +99,14 @@ public class Menu {
 		System.out.println(team.getId() + ": " + team.getTeamName() + ": " + team.getTeamRank() + ": " + team.getWins() + ": " + team.getLosses() + ": " 
 		+ team.getConference());
 		
+		
+	}
+	//display all sponsors using function defined in sponsors file, based off the menu.start option
+	private void displaySponsors() throws SQLException {
+		System.out.println("Enter Sponsor Id: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		Sponsors sponsor = SponsorsDao.getSponsorById(id);
+		System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
 		
 	}
 	
