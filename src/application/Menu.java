@@ -15,8 +15,13 @@ import java.util.List;
 public class Menu {
 	
 	private PlayoffTeamsDao playoffTeamsDao = new PlayoffTeamsDao();
+<<<<<<< Updated upstream
 	private PlayersDao playersDao = new PlayersDao();
 	private SponsorsDao sponsorsDao = new SponsorsDao();
+=======
+	//private PlayersDao playerDao = new PlayersDao();
+	//private ScannerDao scannerDao = new ScannerDao();
+>>>>>>> Stashed changes
 	
 	private Scanner scanner = new Scanner(System.in);
 	
@@ -43,9 +48,10 @@ public class Menu {
 				if(selection.equals("1")) {
 					displayTeams();
 				}
-				if(selection.equals("2")) {
+				else if(selection.equals("2")) {
 					displayTeam();
 				}
+<<<<<<< Updated upstream
 				if(selection.equals("3")) {
 					createTeam();
 				}
@@ -69,6 +75,31 @@ public class Menu {
 				}
 				if(selection.equals("10")) {
 					displaySponsor();
+=======
+				else if(selection.equals("3")) {
+					createTeam();
+				}
+				else if(selection.equals("4")) {
+					deleteTeam();
+				}
+				else if(selection.equals("5")) {
+					//displayPlayers();
+				}
+				else if(selection.equals("6")) {
+					//displayPlayer();
+				}
+				else if(selection.equals("7")) {
+					//createPlayer();
+				}
+				else if(selection.equals("8")) {
+					//deletePlayer();
+				}
+				else if(selection.equals("9")) {
+					//displaySponsors();
+				}
+				else if(selection.equals("10")) {
+					//displaySponsor();
+>>>>>>> Stashed changes
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -86,8 +117,12 @@ public class Menu {
 			System.out.println(i + 1 + ") " + options.get(i));
 		}
 	}
+<<<<<<< Updated upstream
 	
 	//display all teams using function defined in playoffteams file, based off the menu.start option
+=======
+	//display all teams using function defined in playoffteams file, based off the menu.start option(1)
+>>>>>>> Stashed changes
 	private void displayTeams() throws SQLException {
 		List<PlayoffTeams> playoffTeams = playoffTeamsDao.getTeams();
 		for(PlayoffTeams playoffTeam: playoffTeams) {
@@ -96,18 +131,21 @@ public class Menu {
 		}
 		
 	}
+<<<<<<< Updated upstream
 	
 	//display a team using function defined in playoffteams file, based off the menu.start option
+=======
+	//display a teams using function defined in playoffteams file, based off the menu.start option(2)
+>>>>>>> Stashed changes
 	private void displayTeam() throws SQLException {
 		System.out.println("Enter Team Id: ");
 		int id = Integer.parseInt(scanner.nextLine());
 		PlayoffTeams team = playoffTeamsDao.getTeamById(id);
 		System.out.println(team.getId() + ": " + team.getTeamName() + ": " + team.getTeamRank() + ": " + team.getWins() + ": " + team.getLosses() + ": " 
 		+ team.getConference());
-		
-		
 	}
 	
+<<<<<<< Updated upstream
 	//create a team using function defined in playoffteams file, based off the menu.start option
 	private void createTeam() throws SQLException {
 		System.out.println("Enter new team name:");
@@ -167,6 +205,31 @@ public class Menu {
 		int id = Integer.parseInt(scanner.nextLine());
 		Sponsors sponsor = SponsorsDao.getSponsorById(id);
 		System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
+=======
+	//create a team using function designed in playoffteams file, based off the menu.star
+	private void createTeam() throws SQLException {
+		System.out.println("Enter an Id: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		System.out.println("Team Rank: ");
+		int teamRank = Integer.parseInt(scanner.nextLine());
+		System.out.println("Team Name: ");
+		String teamName = scanner.nextLine();
+		System.out.println("Number of Team Wins: ");
+		int wins = Integer.parseInt(scanner.nextLine());
+		System.out.println("Number of Team Losses: ");
+		int losses = Integer.parseInt(scanner.nextLine());
+		System.out.println("Team Conference ('E' or 'W' for East or West): ");
+		String conference  = scanner.nextLine(); 
+		playoffTeamsDao.createTeam(id, teamRank, teamName, wins, losses, conference);
+		System.out.println("Team successfully created!");
+	}
+	//delete a team using function defined in playoffteams file, based off the menu.start(4)
+	private void deleteTeam() throws SQLException {
+		System.out.println("Enter Team Id to delete: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		playoffTeamsDao.deleteTeamById(id);
+		System.out.println("Team successfully deleted!");
+>>>>>>> Stashed changes
 	}
 	
 	
