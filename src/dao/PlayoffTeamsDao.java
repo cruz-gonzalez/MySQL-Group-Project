@@ -15,6 +15,8 @@ public class PlayoffTeamsDao {
 	//private PlayersDao playerDao = new PlayersDao(); 
 	private final String GET_TEAMS_QUERY = "SELECT * FROM playoff_teams";
 	private final String GET_TEAM_BY_ID_QUERY = "SELECT * FROM playoff_teams WHERE id = ?";
+	private final String CREATE_NEW_TEAM_QUERY = "INSERT INTO playoff_teams(name) VALUES(?)";
+	private final String DELETE_TEAM_BY_ID_QUERY = "DELETE FROM playoff_teams WHERE id = ?";
 	
 	//constructor so that the connection can be used outside of the private definition within this class (line 14)
 	public PlayoffTeamsDao () {
@@ -31,6 +33,7 @@ public class PlayoffTeamsDao {
 		
 		return playoffTeams;
 	}
+	
 	//get all playoffteams with proper syntax according to our playoffteam table parameters
 	public PlayoffTeams getTeamById(int id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(GET_TEAM_BY_ID_QUERY);
@@ -40,9 +43,25 @@ public class PlayoffTeamsDao {
 		return populateTeam(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6));
 		
 	}
-	//get a playoffteam with proper syntax according to our playoffteam table parameters
+	
+	//create a team with proper syntax according to table parameters
+	public void createNewTeam(int id, int teamRank, String teamName, int wins, int losses, String conference) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(CREATE_NEW_TEAM_QUERY);
+		ps.setString(1, teamName);
+		ps.executeUpdate();
+	}
+	
+	//get a team with proper syntax according to our playoffteam table parameters
 	private PlayoffTeams populateTeam(int id, int teamRank, String teamName, int wins, int losses, String conference) {
 		return new PlayoffTeams(id, teamRank, teamName, wins, losses, conference);
+	}
+	
+	//delete a team according to the playoffteam table parameters
+	public void deleteTeamById(int id) throws SQLException {
+		playersDao.deletePlayersByTeamId(id);
+		PreparedStatement ps = connection.prepareStatement(DELETE_TEAM_BY_ID_QUERY);
+		ps.setInt(1,  id);
+		ps.executeUpdate();
 	}
 	
 }

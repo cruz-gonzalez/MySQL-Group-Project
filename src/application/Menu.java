@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import dao.PlayoffTeamsDao;
 import dao.SponsorsDao;
+import dao.PlayersDao;
+import entity.Players;
 import entity.PlayoffTeams;
 import entity.Sponsors;
 
@@ -13,6 +15,8 @@ import java.util.List;
 public class Menu {
 	
 	private PlayoffTeamsDao playoffTeamsDao = new PlayoffTeamsDao();
+	private PlayersDao playersDao = new PlayersDao();
+	private SponsorsDao sponsorsDao = new SponsorsDao();
 	
 	private Scanner scanner = new Scanner(System.in);
 	
@@ -43,28 +47,28 @@ public class Menu {
 					displayTeam();
 				}
 				if(selection.equals("3")) {
-					//createTeam();
+					createTeam();
 				}
 				if(selection.equals("4")) {
-					//deleteTeam();
+					deleteTeam();
 				}
 				if(selection.equals("5")) {
-					//displayPlayers();
+					displayPlayers();
 				}
 				if(selection.equals("6")) {
-					//displayPlayer();
+					displayPlayer();
 				}
 				if(selection.equals("7")) {
-					//createPlayer();
+					createPlayer();
 				}
 				if(selection.equals("8")) {
-				//	deletePlayer();
+					//deletePlayer();
 				}
 				if(selection.equals("9")) {
-					//displaySponsors();
+					displaySponsors();
 				}
 				if(selection.equals("10")) {
-					//displaySponsor();
+					displaySponsor();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -82,6 +86,7 @@ public class Menu {
 			System.out.println(i + 1 + ") " + options.get(i));
 		}
 	}
+	
 	//display all teams using function defined in playoffteams file, based off the menu.start option
 	private void displayTeams() throws SQLException {
 		List<PlayoffTeams> playoffTeams = playoffTeamsDao.getTeams();
@@ -91,7 +96,8 @@ public class Menu {
 		}
 		
 	}
-	//display a teams using function defined in playoffteams file, based off the menu.start option
+	
+	//display a team using function defined in playoffteams file, based off the menu.start option
 	private void displayTeam() throws SQLException {
 		System.out.println("Enter Team Id: ");
 		int id = Integer.parseInt(scanner.nextLine());
@@ -101,13 +107,67 @@ public class Menu {
 		
 		
 	}
+	
+	//create a team using function defined in playoffteams file, based off the menu.start option
+	private void createTeam() throws SQLException {
+		System.out.println("Enter new team name:");
+		String teamName = scanner.nextLine();
+		playoffTeamsDao.createNewTeam(teamName);
+	}
+	
+	//delete a team using function defined in playoffteams file, bsaed off the menu.start option
+	private void deleteTeam() throws SQLException {
+		System.out.println("Enter team id to delete: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		playoffTeamsDao.deleteTeamById(id);
+		
+	}
+	
+	//display all players using function defined in players file, based off the menu.start option
+	private void displayPlayers() throws SQLException {
+		List<Players> players = PlayersDao.getPlayers();
+		for(Players player: players) {
+			System.out.println(player.getId() + ": " + player.getTeamId() + ": " + player.getPlayerName() + ": " + player.getPlayerRank() + ": " + player.getTeam() + 
+			": " + player.getAveragePoints() + ": " + player.getGamesPlayed() + ": " + player.getMinutesPerGame());
+		}
+			
+	}
+	
+	//display a player using function defined in players file, based off the menu.start option
+	private void displayPlayer() throws SQLException {
+		System.out.println("Enter Player Id: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		Players player = playersDao.getPlayerById(id);
+		System.out.println(player.getId() + ": " + player.getTeamId() + ": " + player.getPlayerName() + ": " + player.getPlayerRank() + ": " + player.getTeam() + 
+			": " + player.getAveragePoints() + ": " + player.getGamesPlayed() + ": " + player.getMinutesPerGame());
+	}
+	
+	//create a player using function defined in players file, based off the menu.start option
+	private void createPlayer() {
+		System.out.println("Enter name of new player: ");
+		String playerName = scanner.nextLine();
+		System.out.println("Enter rank of new player");
+		
+		
+		
+	}
+	
 	//display all sponsors using function defined in sponsors file, based off the menu.start option
 	private void displaySponsors() throws SQLException {
+		List<Sponsors> sponsors = sponsorsDao.getSponsors();
+		for(Sponsors sponsor: sponsors) {
+			System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
+		}
+		
+	}
+	
+	//display a sponsor using function defined in sponsors file, based off the menu.start option
+	private void displaySponsor() throws SQLException {
 		System.out.println("Enter Sponsor Id: ");
 		int id = Integer.parseInt(scanner.nextLine());
 		Sponsors sponsor = SponsorsDao.getSponsorById(id);
 		System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
-		
 	}
+	
 	
 }

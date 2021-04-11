@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class SponsorsDao {
 		
 	}
 	//get all sponsors with proper syntax according to our sponsors table parameters
-	public Sponsors getSponsorsById(int id) throws SQLException {
+	public Sponsors getSponsorById(int id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(GET_SPONSOR_BY_ID_QUERY);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
