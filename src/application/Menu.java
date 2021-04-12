@@ -5,9 +5,13 @@ import java.util.Scanner;
 import dao.PlayoffTeamsDao;
 import dao.SponsorsDao;
 import dao.PlayersDao;
+import dao.PlayerSponsorDao;
+import dao.TeamSponsorDao;
 import entity.Players;
 import entity.PlayoffTeams;
 import entity.Sponsors;
+import entity.PlayerSponsor;
+import entity.TeamSponsor;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -17,20 +21,24 @@ public class Menu {
 	private PlayoffTeamsDao playoffTeamsDao = new PlayoffTeamsDao();
 	private PlayersDao playersDao = new PlayersDao();
 	private SponsorsDao sponsorsDao = new SponsorsDao();
+	private PlayerSponsorDao playerSponsorDao = new PlayerSponsorDao();
+	private TeamSponsorDao teamSponsorDao = new TeamSponsorDao();
 	
 	private Scanner scanner = new Scanner(System.in);
 	
 	
-	private List<String> options = Arrays.asList("Display Teams",
-			 "Display Team",
-			 "Create Team",
-			 "Delete Team",
-			 "Display Players",
-			 "Display Player",
-			 "Create player",
-			 "Delete Player",
-			 "Display Sponsors",
-			 "Display Sponsor");
+	private List<String> options = Arrays.asList("Display List of all Teams",
+			 "Display a Team",
+			 "Create a Team",
+			 "Delete a Team",
+			 "Display List of all Players",
+			 "Display a Player",
+			 "Create a player",
+			 "Delete a Player",
+			 "Display List of all Sponsors",
+			 "Display a Sponsor",
+			 "Display List of all Players with their respective Sponsors (Format: PlayerId : SponsorId)",
+			 "Display List of all Teams with their respective Sponsors (Format: TeamId : SponsorId)");
 	public void start() {
 		String selection = "";
 		 
@@ -69,6 +77,18 @@ public class Menu {
 				}
 				if(selection.equals("10")) {
 					displaySponsor();
+				}
+				if(selection.equals("11")) {
+					displayPlayerSponsors();
+				}
+				if(selection.equals("12")) {
+					//displayPlayerSponsor();
+				}
+				if(selection.equals("13")) {
+					//displayTeamSponsors();
+				}
+				if(selection.equals("14")) {
+					//displayTeamSponsor();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -112,16 +132,22 @@ public class Menu {
 		private void createTeam() throws SQLException {
 			System.out.println("Enter an Id: ");
 			int id = Integer.parseInt(scanner.nextLine());
+			
 			System.out.println("Team Rank: ");
 			int teamRank = Integer.parseInt(scanner.nextLine());
+			
 			System.out.println("Team Name: ");
 			String teamName = scanner.nextLine();
+			
 			System.out.println("Number of Team Wins: ");
 			int wins = Integer.parseInt(scanner.nextLine());
+			
 			System.out.println("Number of Team Losses: ");
 			int losses = Integer.parseInt(scanner.nextLine());
+			
 			System.out.println("Team Conference ('E' or 'W' for East or West): ");
-			String conference  = scanner.nextLine(); 
+			String conference  = scanner.nextLine();
+			
 			playoffTeamsDao.createNewTeam(id, teamRank, teamName, wins, losses, conference);
 			System.out.println("Team successfully created!");
 		}
@@ -207,5 +233,21 @@ public class Menu {
 		System.out.println(sponsor.getId() + ": " + sponsor.getSponsorName() + ": ");
 	}
 	
+	private void displayPlayerSponsors() throws SQLException {
+		List<PlayerSponsor> playerSponsors = playerSponsorDao.getPlayerSponsors();
+		for(PlayerSponsor playerSponsor: playerSponsors) {
+			System.out.println(playerSponsor.getPlayerId() + ": " + playerSponsor.getSponsorId() + ": ");
+		}
+		
+	}
+	/*
+	private void displayTeamsSponsors() throws SQLException {
+		List<TeamsSponsors> teamsSponsors = teamsSponsorsDao.getTeamsSponsors();
+		for(TeamsSponsors teamSponsor: teamsSponsors) {
+			System.out.println(teamSponsor.getTeamId() + ": " + teamSponsor.getSponsorId() + ": ");
+		}
+		
+	}
+	*/
 	
 }
