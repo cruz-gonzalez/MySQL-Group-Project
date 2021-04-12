@@ -37,8 +37,11 @@ public class Menu {
 			 "Delete a Player",
 			 "Display List of all Sponsors",
 			 "Display a Sponsor",
-			 "Display List of all Players with their respective Sponsors (Format: PlayerId : SponsorId)",
-			 "Display List of all Teams with their respective Sponsors (Format: TeamId : SponsorId)");
+			 "Display List of all Players with their respective Sponsors (Display Format - PlayerId : SponsorId)",
+			 "Display a Player with their respective Sponsors (Display Format - PlayerId: SponsorId)",
+			 "Display List of all Teams with their respective Sponsors (Display Format - TeamId : SponsorId)",
+			 "Display a Team with their respective Sponsors (Display Format - TeamId : SponsorId)");
+
 	public void start() {
 		String selection = "";
 		 
@@ -82,13 +85,13 @@ public class Menu {
 					displayPlayerSponsors();
 				}
 				if(selection.equals("12")) {
-					//displayPlayerSponsor();
+					displayPlayerSponsorsById();
 				}
 				if(selection.equals("13")) {
-					//displayTeamSponsors();
+					displayTeamSponsors();
 				}
 				if(selection.equals("14")) {
-					//displayTeamSponsor();
+					displayTeamSponsorById();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -240,14 +243,32 @@ public class Menu {
 		}
 		
 	}
-	/*
-	private void displayTeamsSponsors() throws SQLException {
-		List<TeamsSponsors> teamsSponsors = teamsSponsorsDao.getTeamsSponsors();
-		for(TeamsSponsors teamSponsor: teamsSponsors) {
+	
+	private void displayPlayerSponsorsById() throws SQLException {
+		System.out.println("Enter Player Id: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		List<PlayerSponsor> playerSponsors = playerSponsorDao.getPlayerSponsorById(id);
+		for(PlayerSponsor playerSponsor: playerSponsors ) {
+		System.out.println(playerSponsor.getPlayerId() + ": " + playerSponsor.getSponsorId() + ": ");
+		}
+	}
+	
+	private void displayTeamSponsors() throws SQLException {
+		List<TeamSponsor> teamsSponsors = teamSponsorDao.getTeamSponsors();
+		for(TeamSponsor teamSponsor: teamsSponsors) {
 			System.out.println(teamSponsor.getTeamId() + ": " + teamSponsor.getSponsorId() + ": ");
 		}
 		
 	}
-	*/
+	
+	private void displayTeamSponsorById() throws SQLException {
+		System.out.println("Enter Team Id: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		List<TeamSponsor> teamSponsors = teamSponsorDao.getTeamSponsorById(id);
+		for(TeamSponsor teamSponsor: teamSponsors ) {
+		System.out.println(teamSponsor.getTeamId() + ": " + teamSponsor.getSponsorId() + ": ");
+		}
+	}
+	
 	
 }
